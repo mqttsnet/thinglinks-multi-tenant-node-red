@@ -5,6 +5,7 @@ services:
       - internal
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     #  - "./certs:/etc/nginx/certs"
     ports:
       - "80:80"
@@ -36,6 +37,7 @@ services:
       - internal
     volumes:
       - "./mongodb:/data/db"
+      - "/etc/localtime:/etc/localtime:ro"
     # ports:
     #   - "27017:27017"
 
@@ -45,6 +47,7 @@ services:
       - internal
     volumes:
       - "./registry:/verdaccio/conf"
+      - "/etc/localtime:/etc/localtime:ro"
     ports:
       - "4873:4873"
 
@@ -63,6 +66,8 @@ services:
       - "traefik.http.routers.manager.rule=HOST(`catalogue.PLACE_HOLDER`)"
       - "traefik.http.services.manager.loadbalancer.server.port=80"
       - "traefik.http.routers.manager.entrypoints=web"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
 
   manager:
     image: manager
@@ -73,6 +78,7 @@ services:
       - internal
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
+      - "/etc/localtime:/etc/localtime:ro"
     environment:
       - "VIRTUAL_HOST=manager.PLACE_HOLDER"
       - "MONGO_URL=mongodb://mongodb/nodered"
