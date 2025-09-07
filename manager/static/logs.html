@@ -72,7 +72,7 @@ function connect() {
 		disconnect();
 	}
 	var selected = document.getElementById("container");
-	if (location.location === 'https:') {
+    if (location.protocol === 'https:') {
 		ws = new WebSocket(`wss://${location.host}` + "/" + selected.options[selected.selectedIndex].value);
 	} else {
 		ws = new WebSocket(`ws://${location.host}` + "/" + selected.options[selected.selectedIndex].value);
